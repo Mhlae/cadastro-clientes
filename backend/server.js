@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
+const { isValidPhone } = require('./utils/phoneValidation');
 
 const app = express();
 const port = 8080;
@@ -44,6 +45,10 @@ app.post('/clientes', (req, res) => {
     return res.status(400).json({ error: 'O nome é obrigatório.' });
   }
 
+  if (Phone !== undefined && !isValidPhone(Phone)) {
+    return res.status(400).json({ error: 'O telefone deve conter apenas números inteiros.' });
+  }
+
   const sql = 'INSERT INTO Persons (Name, Email, Phone) VALUES (?, ?, ?)';
   const values = [Name.trim(), Email?.trim() || '', Phone?.trim() || ''];
 
@@ -67,6 +72,10 @@ app.put('/clientes/:id', (req, res) => {
 
   if (!Name || typeof Name !== 'string' || Name.trim() === '') {
     return res.status(400).json({ error: 'O nome é obrigatório.' });
+  }
+
+  if (Phone !== undefined && !isValidPhone(Phone)) {
+    return res.status(400).json({ error: 'O telefone deve conter apenas números inteiros.' });
   }
 
   const sql = 'UPDATE Persons SET Name = ?, Email = ?, Phone = ? WHERE PersonID = ?';
