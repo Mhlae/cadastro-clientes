@@ -1,6 +1,7 @@
 # Cadastro de Clientes
 
-Aplicação full-stack simples para cadastro, listagem, edição e exclusão de clientes utilizando:
+Aplicação full-stack simples feita com auxilio de AI para aprendizagem.
+Cadastro, listagem, edição e exclusão de clientes utilizando:
 
 - Node.js + Express + SQLite no backend
 - React + Vite no frontend
